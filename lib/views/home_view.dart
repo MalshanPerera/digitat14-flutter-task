@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../helpers/app_colors.dart';
 import '../helpers/app_strings.dart';
-import '../models/events_model.dart';
 import '../view_models/home_view_model/home_view_model.dart';
 import '../widgets/no_search_results.dart';
 import '../widgets/search_text_field.dart';
@@ -24,14 +23,13 @@ class HomeView extends StatelessWidget {
             body: Column(
               children: [
                 const SearchTextField(),
-                Selector<HomeViewModel, List<Event>?>(
-                  selector: (_, vm) => vm.events,
-                  builder: (_, events, __) {
-                    if (events == null) {
+                Consumer<HomeViewModel>(
+                  builder: (_, vm, __) {
+                    if (vm.events == null) {
                       return const NoSearchResults();
                     }
 
-                    if (events.isEmpty) {
+                    if (vm.events!.isEmpty) {
                       return Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,14 +46,16 @@ class HomeView extends StatelessWidget {
                     return Expanded(
                       child: ListView.separated(
                         padding: EdgeInsets.zero,
-                        itemCount: events.length,
+                        itemCount: vm.events!.length,
                         itemBuilder: (context, index) {
                           return InkWell(
                             child: TypeHeadTile(
-                              event: events[index],
+                              event: vm.events![index],
+                              favorites: vm.favorites,
                             ),
                             onTap: () {
-                              Navigator.pushNamed(context, DETAILS_ROUTE, arguments: events[index]);
+                              Navigator.pushNamed(context, DETAILS_ROUTE,
+                                  arguments: vm.events![index]);
                             },
                           );
                         },

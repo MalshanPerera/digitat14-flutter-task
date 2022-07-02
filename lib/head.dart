@@ -16,46 +16,46 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: APP_NAME,
-      debugShowCheckedModeBanner: false,
-      navigatorKey: sl<NavigationService>().navigatorKey,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryTextTheme: const TextTheme(
-          headline1: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
+    return ChangeNotifierProvider(
+      create: (_) => sl<HomeViewModel>(),
+      child: MaterialApp(
+        title: APP_NAME,
+        debugShowCheckedModeBanner: false,
+        navigatorKey: sl<NavigationService>().navigatorKey,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          primaryTextTheme: const TextTheme(
+            headline1: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
           ),
         ),
+        initialRoute: INITIAL_ROUTE,
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case INITIAL_ROUTE:
+              return MaterialPageRoute(
+                builder: (c) => const SplashView(),
+              );
+            case HOME_ROUTE:
+              return MaterialPageRoute(
+                builder: (c) => const HomeView(),
+              );
+            case DETAILS_ROUTE:
+              return MaterialPageRoute(
+                builder: (c) => DetailsView(
+                  event: settings.arguments as Event,
+                ),
+              );
+            default:
+              return MaterialPageRoute(
+                builder: (c) => const ViewNotFound(),
+              );
+          }
+        },
       ),
-      initialRoute: INITIAL_ROUTE,
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case INITIAL_ROUTE:
-            return MaterialPageRoute(
-              builder: (c) => const SplashView(),
-            );
-          case HOME_ROUTE:
-            return MaterialPageRoute(
-              builder: (c) => ChangeNotifierProvider(
-                create: (_) => sl<HomeViewModel>(),
-                child: const HomeView(),
-              ),
-            );
-          case DETAILS_ROUTE:
-            return MaterialPageRoute(
-              builder: (c) => DetailsView(
-                event: settings.arguments as Event,
-              ),
-            );
-          default:
-            return MaterialPageRoute(
-              builder: (c) => const ViewNotFound(),
-            );
-        }
-      },
     );
   }
 }

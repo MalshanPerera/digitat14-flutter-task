@@ -1,4 +1,6 @@
+import '../view_models/home_view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/app_colors.dart';
 import '../helpers/app_utils.dart';
@@ -44,12 +46,18 @@ class DetailsView extends StatelessWidget {
                       style: Theme.of(context).primaryTextTheme.headline1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    InkWell(
-                      child: const Icon(
-                        Icons.favorite,
-                        color: Colors.white,
-                      ),
-                      onTap: () {},
+                    Consumer<HomeViewModel>(
+                      builder: (_, vm, __) {
+                        return InkWell(
+                          child: Icon(
+                            _checkIfFavorite(vm.favorites) ? Icons.favorite : Icons.favorite_border,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            vm.addToFavorites("${event.id}");
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
@@ -111,5 +119,10 @@ class DetailsView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _checkIfFavorite(List<String>? favorites) {
+    if (favorites == null) return false;
+    return favorites.contains("${event.id}");
   }
 }

@@ -6,10 +6,12 @@ import 'cache_image.dart';
 
 class TypeHeadTile extends StatelessWidget {
   final Event event;
+  final List<String>? favorites;
 
   const TypeHeadTile({
     Key? key,
     required this.event,
+    required this.favorites,
   }) : super(key: key);
 
   @override
@@ -29,11 +31,24 @@ class TypeHeadTile extends StatelessWidget {
                   imageURL: event.performers[0].image,
                 ),
               ),
-              const Icon(
-                Icons.favorite,
-                size: 30.0,
-                color: Colors.red,
-              ),
+              _checkIfFavorite()
+                  ? Positioned(
+                      top: 5.0,
+                      left: 5.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        padding: EdgeInsets.all(Utils.getHeight(5.0)),
+                        child: const Icon(
+                          Icons.favorite,
+                          size: 20.0,
+                          color: Colors.red,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
           SizedBox(
@@ -83,5 +98,10 @@ class TypeHeadTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _checkIfFavorite() {
+    if (favorites == null) return false;
+    return favorites?.contains("${event.id}") ?? false;
   }
 }
