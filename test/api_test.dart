@@ -13,7 +13,7 @@ import 'package:http/testing.dart';
 
 void main() {
   test("Load all data from the api", () async {
-    Future<String> getData(Client http) async {
+    Future<String> getAllData(Client http) async {
       Uri numberAPIURL = Uri.parse(
           'https://api.seatgeek.com/2/events?client_id=Mjc2NjI1Njd8MTY1NjU4NjU0MS45NTAyNjcz');
       final response = await http.get(numberAPIURL);
@@ -146,6 +146,6 @@ void main() {
 
       return Response(jsonEncode(response), 200);
     });
-    expect(await getData(mockHTTPClient), isA<String>());
+    expect(await getAllData(mockHTTPClient), isA<String>());
   });
 }
