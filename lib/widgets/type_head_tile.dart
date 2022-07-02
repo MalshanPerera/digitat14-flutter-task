@@ -40,7 +40,9 @@ class TypeHeadTile extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        padding: EdgeInsets.all(Utils.getHeight(5.0)),
+                        padding: EdgeInsets.all(
+                          Utils.getHeight(5.0),
+                        ),
                         child: const Icon(
                           Icons.favorite,
                           size: 20.0,

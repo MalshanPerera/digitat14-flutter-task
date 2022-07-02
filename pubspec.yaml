@@ -40,6 +40,7 @@ dependencies:
   cached_network_image: 3.2.1
   intl: 0.17.0
   shared_preferences: 2.0.15
+  desktop_window: 0.4.0
 
 dev_dependencies:
   flutter_test:
