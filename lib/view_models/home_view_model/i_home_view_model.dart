@@ -1,6 +1,6 @@
-import 'package:digitat14_flutter_task/models/events_model.dart';
-import 'package:digitat14_flutter_task/repository/clients/home_repository.dart';
-import 'package:digitat14_flutter_task/view_models/home_view_model/home_view_model.dart';
+import '../../models/events_model.dart';
+import '../../repository/clients/home_repository.dart';
+import 'home_view_model.dart';
 
 class IHomeViewModel extends HomeViewModel {
   final HomeRepository homeRepository;
@@ -16,10 +16,10 @@ class IHomeViewModel extends HomeViewModel {
     homeRepository.getEvents(searchText.replaceAll(" ", "+")).then((events) {
       if (events != null) {
         _eventList = events.events.toList();
-        notifyListeners();
       } else {
-        _eventList = [];
+        _eventList = null;
       }
+      notifyListeners();
     });
   }
 

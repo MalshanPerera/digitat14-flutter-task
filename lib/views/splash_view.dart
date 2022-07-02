@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/app_colors.dart';
+import '../helpers/app_strings.dart';
 import '../helpers/app_utils.dart';
 
 class SplashView extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2)).then((_) {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, HOME_ROUTE);
     });
   }
 

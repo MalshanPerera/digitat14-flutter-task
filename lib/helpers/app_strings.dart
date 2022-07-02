@@ -1,4 +1,4 @@
-const APP_NAME = 'Health App';
+const APP_NAME = 'Digitat14 Flutter Task';
 const String REQUIRED_FIELD = "This field is required!";
 const String WRONG_EMAIL = "Please enter a valid e-mail!";
 const String INVALID_CRED = "Invalid email or password";
@@ -13,3 +13,9 @@ const String FORMAT_ERROR = 'Formatting error';
 const String HTTP_ERROR = 'Oops! An error has occurred';
 const String UNKNOWN_ERROR = 'Unknown Error';
 const String TERMS_AND_CONDITIONS_ERROR = '"You must agree to the terms and conditions"';
+
+/// Route Strings
+
+const String INITIAL_ROUTE = '/';
+const String HOME_ROUTE = '/home';
+const String DETAILS_ROUTE = '/details';

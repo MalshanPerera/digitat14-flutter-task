@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/app_colors.dart';
+import '../helpers/app_strings.dart';
 import '../models/events_model.dart';
 import '../view_models/home_view_model/home_view_model.dart';
 import '../widgets/no_search_results.dart';
 import '../widgets/search_text_field.dart';
 import '../widgets/type_head_tile.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
                               event: events[index],
                             ),
                             onTap: () {
-                              Navigator.pushNamed(context, '/details', arguments: events[index]);
+                              Navigator.pushNamed(context, DETAILS_ROUTE, arguments: events[index]);
                             },
                           );
                         },

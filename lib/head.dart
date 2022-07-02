@@ -1,8 +1,9 @@
-import 'package:digitat14_flutter_task/models/events_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'helpers/app_strings.dart';
 import 'injection_container.dart';
+import 'models/events_model.dart';
 import 'services/navigation_service.dart';
 import 'view_models/home_view_model/home_view_model.dart';
 import 'views/details_view.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Digitat14 Flutter Task',
+      title: APP_NAME,
       debugShowCheckedModeBanner: false,
       navigatorKey: sl<NavigationService>().navigatorKey,
       theme: ThemeData(
@@ -29,21 +30,21 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: '/',
+      initialRoute: INITIAL_ROUTE,
       onGenerateRoute: (settings) {
         switch (settings.name) {
-          case '/':
+          case INITIAL_ROUTE:
             return MaterialPageRoute(
               builder: (c) => const SplashView(),
             );
-          case '/home':
+          case HOME_ROUTE:
             return MaterialPageRoute(
               builder: (c) => ChangeNotifierProvider(
                 create: (_) => sl<HomeViewModel>(),
                 child: const HomeView(),
               ),
             );
-          case '/details':
+          case DETAILS_ROUTE:
             return MaterialPageRoute(
               builder: (c) => DetailsView(
                 event: settings.arguments as Event,
